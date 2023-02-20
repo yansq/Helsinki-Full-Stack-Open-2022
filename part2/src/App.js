@@ -36,7 +36,7 @@ const App = () => {
     PersonsService
         .postPerson({name: newName, number: newNumber})
         .then(res => setPersons(persons.concat(res)))
-    setNotification(newName)
+    setNotification(`Added ${newName}`)
     setNewName('')
     setNewNumber('')
   }
