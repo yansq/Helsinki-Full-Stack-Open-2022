@@ -30,17 +30,27 @@ const App = () => {
         return
       }
     }
+    PersonsService
+        .postPerson({name: newName, number: newNumber})
+        .then(res => setPersons(persons.concat(res)))
     setNewName('')
     setNewNumber('')
-    setPersons(persons.concat({name: newName, number: newNumber}))
-    const response = PersonsService.postPersons({name: newName, number: newNumber})
-    console.log(response)
   }
 
-  useEffect(() => {
+  const deleteName = (id, name) => {
+    if (window.confirm(`Delete ${name}?`)) {
+      PersonsService.deletePerson(id).then(res => getPersons())
+    }
+  }
+
+  const getPersons = () => {
     PersonsService
         .getPersons()
         .then(persons => setPersons(persons))
+  }
+
+  useEffect(() => {
+    getPersons()
   }, [])
 
   return (
@@ -53,7 +63,7 @@ const App = () => {
           newNumber={newNumber} handlerNumberChange={handlerNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} filter={filter} />
+      <Persons persons={persons} filter={filter} deleteName={deleteName} />
     </div>
   )
 }
