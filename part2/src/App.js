@@ -3,12 +3,15 @@ import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Persons from './Persons'
 import PersonsService from './PersonsService'
+import Notification from './Notification'
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notice, setNotice] = useState(null)
 
   const handlerNameChange = (event) => {
     setNewName(event.target.value)
@@ -33,8 +36,16 @@ const App = () => {
     PersonsService
         .postPerson({name: newName, number: newNumber})
         .then(res => setPersons(persons.concat(res)))
+    setNotification(newName)
     setNewName('')
     setNewNumber('')
+  }
+
+  const setNotification = (content) => {
+    setNotice(content)
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
   }
 
   const deleteName = (id, name) => {
@@ -56,6 +67,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notice} />
       <Filter filter={filter} handlerFilterChange={handlerFilterChange} />
       <h2>add a new</h2>
       <PersonForm addName={addName} 
