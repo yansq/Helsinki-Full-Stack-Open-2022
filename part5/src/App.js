@@ -14,6 +14,20 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
+  const logout = () => {
+    window.localStorage.clear()
+    setUser(null)
+  }
+
   const blogForm = () => {
     return (
       <div>
@@ -36,6 +50,9 @@ const App = () => {
       }
       { user !== null &&
         blogForm() 
+      }
+      { user !== null &&
+        <button onClick={logout}>logout</button>
       }
     </div>
   )
