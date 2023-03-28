@@ -53,7 +53,7 @@ const Login = ({ onUserChange, setErrorMessage }) => {
                 <button type="submit">login</button>
             </form>
         </div>
-        )
+    )
 }
 
 export default Login

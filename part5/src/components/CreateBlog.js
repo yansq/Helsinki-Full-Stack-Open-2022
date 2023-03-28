@@ -1,45 +1,51 @@
-import { useState } from 'react'
-import blogsService from '../services/blogs'
+import { useState } from "react";
+import blogsService from "../services/blogs";
 
-const CreateBlog = () => {
+const CreateBlog = ({ updateBlogs }) => {
+    const [title, setTitle] = useState("");
+    const [author, setAuthor] = useState("");
+    const [url, setUrl] = useState("");
 
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [url, setUrl] = useState('')
-    
-    const createBlog = () => {
-        event.preventDefault()
+    const createBlog = async (event) => {
+        event.preventDefault();
         const newBlog = {
             title,
             author,
-            url
-        }
-        blogsService.create(newBlog)
-    }
-
+            url,
+        };
+        await blogsService.create(newBlog);
+        const blogs = await blogsService.getAll();
+        updateBlogs(blogs);
+        setTitle("");
+        setAuthor("");
+        setUrl("");
+    };
 
     return (
         <div>
             <h2>create new</h2>
             <form onSubmit={createBlog}>
-                <div>title:
-                    <input 
+                <div>
+                    title:
+                    <input
                         type="text"
                         value={title}
                         name="Title"
                         onChange={({ target }) => setTitle(target.value)}
                     />
                 </div>
-                <div>author:
-                    <input 
+                <div>
+                    author:
+                    <input
                         type="text"
                         value={author}
                         name="Author"
                         onChange={({ target }) => setAuthor(target.value)}
                     />
                 </div>
-                <div>url:
-                    <input 
+                <div>
+                    url:
+                    <input
                         type="text"
                         value={url}
                         name="Url"
@@ -49,8 +55,7 @@ const CreateBlog = () => {
                 <button type="submit">create</button>
             </form>
         </div>
-    )
+    );
+};
 
-}
-
-export default CreateBlog
+export default CreateBlog;
