@@ -1,32 +1,28 @@
-import { useState } from 'react'
-import loginService from '../services/login'
-import blogService from '../services/blogs'
+import { useState } from "react";
+import loginService from "../services/login";
+import blogService from "../services/blogs";
 
-const Login = ({ onUserChange, setErrorMessage }) => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    
+const Login = ({ onUserChange, setMsg }) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const handleLogin = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         try {
             const user = await loginService.login({
-                username, password
-            })
+                username,
+                password,
+            });
 
-            window.localStorage.setItem(
-                'loggedBlogappUser', JSON.stringify(user)
-            )
-            blogService.setToken(user.token)
-            onUserChange(user)
-            setUsername('')
-            setPassword('')
+            window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
+            blogService.setToken(user.token);
+            onUserChange(user);
+            setUsername("");
+            setPassword("");
         } catch (exception) {
-            setErrorMessage('Wrong credentials')
-            setTimeout(() => {
-                setErrorMessage(null)
-            }, 5000);
+            setMsg("wrong username or password");
         }
-    }
+    };
 
     return (
         <div>
@@ -34,7 +30,7 @@ const Login = ({ onUserChange, setErrorMessage }) => {
             <form onSubmit={handleLogin}>
                 <div>
                     username
-                    <input 
+                    <input
                         type="text"
                         value={username}
                         name="Username"
@@ -43,7 +39,7 @@ const Login = ({ onUserChange, setErrorMessage }) => {
                 </div>
                 <div>
                     password
-                    <input 
+                    <input
                         type="password"
                         value={password}
                         name="Passowrd"
@@ -53,7 +49,7 @@ const Login = ({ onUserChange, setErrorMessage }) => {
                 <button type="submit">login</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;
