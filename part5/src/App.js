@@ -38,7 +38,7 @@ const App = () => {
         <div>{user.username} logged in</div>
         <br />
         {blogs.map((blog) => (
-          <Blog key={blog._id} blog={blog} />
+          <Blog key={blog._id} blog={blog} updateBlogs={setBlogs} />
         ))}
       </div>
     );
