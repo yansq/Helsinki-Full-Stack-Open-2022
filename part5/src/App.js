@@ -14,7 +14,9 @@ const App = () => {
   const createFormRef = useRef();
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    blogService.getAll().then((blogs) => {
+      updateBlogs(blogs);
+    });
   }, []);
 
   useEffect(() => {
@@ -25,6 +27,19 @@ const App = () => {
       blogService.setToken(user.token);
     }
   }, []);
+
+  const updateBlogs = (blogs) => {
+    blogs.sort((a, b) => {
+      if (!a.likes) {
+        return 1;
+      }
+      if (!b.likes) {
+        return -1;
+      }
+      return b.likes - a.likes;
+    });
+    setBlogs(blogs);
+  };
 
   const logout = () => {
     window.localStorage.clear();
@@ -38,7 +53,7 @@ const App = () => {
         <div>{user.username} logged in</div>
         <br />
         {blogs.map((blog) => (
-          <Blog key={blog._id} blog={blog} updateBlogs={setBlogs} />
+          <Blog key={blog._id} blog={blog} updateBlogs={updateBlogs} />
         ))}
       </div>
     );
@@ -48,7 +63,7 @@ const App = () => {
     return (
       <Togglable buttonLabel="new note" ref={createFormRef}>
         <CreateBlog
-          updateBlogs={setBlogs}
+          updateBlogs={updateBlogs}
           setMsg={setMsg}
           createFormRef={createFormRef}
         />
