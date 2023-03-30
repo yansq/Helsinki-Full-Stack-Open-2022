@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import blogService from "../services/blogs";
 
-const Blog = ({ blog, updateBlogs }) => {
+const Blog = ({ blog, updateBlogs, user }) => {
   const [isShowDetail, setIsShowDetail] = useState(false);
 
   const hideWhenVisible = { display: isShowDetail ? "" : "none" };
@@ -19,10 +19,17 @@ const Blog = ({ blog, updateBlogs }) => {
       ...blog,
       likes: blog.likes ? blog.likes + 1 : 1,
     };
-    console.log(updatedBlog);
     await blogService.update(blog._id, updatedBlog);
     const blogs = await blogService.getAll();
     updateBlogs(blogs);
+  };
+
+  const removeBlog = async () => {
+    if (window.confirm(`Remove ${blog.title} by ${blog.author}`)) {
+      await blogService.remove(blog._id);
+      const blogs = await blogService.getAll();
+      updateBlogs(blogs);
+    }
   };
 
   return (
@@ -40,6 +47,11 @@ const Blog = ({ blog, updateBlogs }) => {
           <button onClick={likeBlog}>like</button>
         </div>
         <div>{blog.user ? blog.user.username : ""}</div>
+        {blog.user && blog.user.username === user.username && (
+          <div>
+            <button onClick={removeBlog}>remove</button>
+          </div>
+        )}
       </div>
     </div>
   );
