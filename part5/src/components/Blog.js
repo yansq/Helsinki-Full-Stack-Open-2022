@@ -40,7 +40,7 @@ const Blog = ({ blog, updateBlogs, user }) => {
           {isShowDetail ? "hide" : "show"}
         </button>
       </div>
-      <div style={hideWhenVisible}>
+      <div className="extra-info" style={hideWhenVisible}>
         <div>{blog.url}</div>
         <div>
           {blog.likes ? blog.likes : 0}

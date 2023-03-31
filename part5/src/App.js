@@ -30,13 +30,7 @@ const App = () => {
 
   const updateBlogs = (blogs) => {
     blogs.sort((a, b) => {
-      if (!a.likes) {
-        return 1;
-      }
-      if (!b.likes) {
-        return -1;
-      }
-      return b.likes - a.likes;
+      !a.likes ? 1 : !b.likes ? -1 : b.likes - a.likes;
     });
     setBlogs(blogs);
   };
