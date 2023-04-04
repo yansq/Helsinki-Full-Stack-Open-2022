@@ -45,5 +45,16 @@ describe("Blog app", () => {
       cy.get("#create-blog-button").click();
       cy.contains("test blog");
     });
+
+    it("A blog can be liked", () => {
+      cy.contains("new blog").click();
+      cy.get("#title").type("test blog");
+      cy.get("#author").type("test author");
+      cy.get("#url").type("test url");
+      cy.get("#create-blog-button").click();
+      cy.contains("show").click();
+      cy.contains("like").click();
+      cy.contains("like").parent().contains("1");
+    });
   });
 });
