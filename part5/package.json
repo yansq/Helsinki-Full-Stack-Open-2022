@@ -15,7 +15,8 @@
     "build": "react-scripts build",
     "test": " jest",
     "eject": "react-scripts eject",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "cypress:open": "cypress open"
   },
   "jest": {
     "transform": {
@@ -51,6 +52,8 @@
     "@babel/preset-env": "^7.20.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "babel-jest": "^29.5.0"
+    "babel-jest": "^29.5.0",
+    "cypress": "^12.9.0",
+    "eslint-plugin-cypress": "^2.13.2"
   }
 }
