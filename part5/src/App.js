@@ -60,7 +60,7 @@ const App = () => {
 
   const createForm = () => {
     return (
-      <Togglable buttonLabel="new note" ref={createFormRef}>
+      <Togglable buttonLabel="new blog" ref={createFormRef}>
         <CreateBlog
           updateBlogs={updateBlogs}
           setMsg={setMsg}

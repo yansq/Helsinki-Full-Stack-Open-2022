@@ -31,4 +31,19 @@ describe("Blog app", () => {
       cy.contains("wrong username or password");
     });
   });
+
+  describe("When logged in", () => {
+    beforeEach(() => {
+      cy.login({ username: "root", password: "root" });
+    });
+
+    it("A blog can be created", () => {
+      cy.contains("new blog").click();
+      cy.get("#title").type("test blog");
+      cy.get("#author").type("test author");
+      cy.get("#url").type("test url");
+      cy.get("#create-blog-button").click();
+      cy.contains("test blog");
+    });
+  });
 });
