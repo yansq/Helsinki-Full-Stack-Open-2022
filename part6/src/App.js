@@ -7,7 +7,6 @@ const App = () => {
 
   const add = (event) => {
     event.preventDefault();
-    console.log(event);
     const content = event.target.anecdote.value;
     event.target.anecdote.value = "";
     dispatch(addAnecdote(content));
