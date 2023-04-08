@@ -1,0 +1,14 @@
+{
+    "anecdotes": [
+        {
+            "id": "1",
+            "content": "Note 1",
+            "votes": 1
+        },
+        {
+            "id": "2",
+            "content": "Note 2",
+            "votes": 1
+        }
+    ]
+}
