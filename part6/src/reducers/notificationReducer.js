@@ -13,18 +13,19 @@ const notificationSlice = createSlice({
   },
 });
 
-export const voteNotice = (notification) => {
-  return {
-    type: "notification/vote",
-    payload: notification,
+export const voteNotice = (notification, time) => {
+  return (dispatch) => {
+    dispatch(vote(notification));
+    setTimeout(() => dispatch(vote("")), time);
   };
 };
 
-export const addNotice = (notification) => {
-  return {
-    type: "notification/add",
-    payload: notification,
+export const addNotice = (notification, time) => {
+  return (dispatch) => {
+    dispatch(add(notification));
+    setTimeout(() => dispatch(add("")), time);
   };
 };
 
+export const { vote, add } = notificationSlice.actions;
 export default notificationSlice.reducer;
