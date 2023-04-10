@@ -8,6 +8,8 @@ const noticeReducer = (state, action) => {
             return `anecode '${action.payload}' voted`;
         case "RESET":
             return "";
+        case "ERROR":
+            return "too short anecdote, must have length 5 or more";
         default:
             return state;
     }

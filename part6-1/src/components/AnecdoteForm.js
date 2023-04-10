@@ -15,6 +15,11 @@ const AnecdoteForm = () => {
   const onCreate = (event) => {
     event.preventDefault();
     const content = event.target.anecdote.value;
+    if (content.length < 5) {
+      return dispatch({
+        type: "ERROR",
+      });
+    }
     event.target.anecdote.value = "";
     console.log("new anecdote");
     newAnecdoteMutation.mutate({ content, votes: 0 });
