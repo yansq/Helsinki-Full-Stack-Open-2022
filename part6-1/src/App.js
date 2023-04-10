@@ -1,8 +1,9 @@
 import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
-import { useMutation, useQueryClient } from "react-query";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getAnecdotes, vote } from "./request";
+import { useContext } from "react";
+import NoticeContext from "./NoticeContext";
 
 const App = () => {
   const queryClient = useQueryClient();
@@ -11,11 +12,21 @@ const App = () => {
       queryClient.invalidateQueries("anecdotes");
     },
   });
+  const [notice, dispatch] = useContext(NoticeContext);
 
   const handleVote = (anecdote) => {
     anecdote = { ...anecdote, votes: anecdote.votes + 1 };
     voteMutation.mutate(anecdote);
     console.log("vote");
+    dispatch({
+      type: "VOTE",
+      payload: anecdote.content,
+    });
+    setTimeout(() => {
+      dispatch({
+        type: "RESET",
+      });
+    }, 5000);
   };
 
   const result = useQuery("anecdotes", getAnecdotes);

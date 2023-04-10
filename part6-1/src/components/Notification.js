@@ -1,18 +1,17 @@
+import { useContext } from "react";
+import NoticeContext from "../NoticeContext";
+
 const Notification = () => {
+  const [notice, dispatch] = useContext(NoticeContext);
+
   const style = {
-    border: 'solid',
+    border: "solid",
     padding: 10,
     borderWidth: 1,
-    marginBottom: 5
-  }
-  
-  if (true) return null
+    marginBottom: 5,
+  };
 
-  return (
-    <div style={style}>
-      
-    </div>
-  )
-}
+  return <div style={style}>{notice}</div>;
+};
 
-export default Notification
+export default Notification;
