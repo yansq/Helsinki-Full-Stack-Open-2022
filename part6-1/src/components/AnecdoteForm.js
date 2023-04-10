@@ -5,9 +5,7 @@ const AnecdoteForm = () => {
   const queryClient = useQueryClient();
   const newAnecdoteMutation = useMutation(addAnecdote, {
     onSuccess: () => {
-      console.log("onSuccess");
       queryClient.invalidateQueries("anecdotes");
-      console.log("onSuccess2");
     },
   });
 

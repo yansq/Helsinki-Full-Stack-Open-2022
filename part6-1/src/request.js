@@ -10,3 +10,11 @@ export const addAnecdote = (newAnecdote) => {
         return res.data;
     });
 };
+
+export const vote = (anecdote) => {
+    axios
+        .put(`http://localhost:3001/anecdotes/${anecdote.id}`, anecdote)
+        .then((res) => {
+            return res.data;
+        });
+};
