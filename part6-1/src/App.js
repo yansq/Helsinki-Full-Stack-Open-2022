@@ -2,7 +2,6 @@ import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 import { useQuery } from "react-query";
 import { getAnecdotes } from "./request";
-import axios from "axios";
 
 const App = () => {
   const handleVote = (anecdote) => {

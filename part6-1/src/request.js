@@ -4,3 +4,9 @@ export const getAnecdotes = () =>
     axios.get("http://localhost:3001/anecdotes").then((res) => {
         return res.data;
     });
+
+export const addAnecdote = (newAnecdote) => {
+    axios.post("http://localhost:3001/anecdotes", newAnecdote).then((res) => {
+        return res.data;
+    });
+};
