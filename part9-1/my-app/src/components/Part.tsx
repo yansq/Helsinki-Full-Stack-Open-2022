@@ -1,6 +1,6 @@
 import { CoursePart } from "../interface";
 
-const Part = ({ coursePart } : { coursePart: CoursePart }) => {
+const Part = ({ coursePart }: { coursePart: CoursePart }): JSX.Element  => {
     const assertNever = (value: never): never => {
         throw new Error(
             `Unhandled discriminated union member: ${JSON.stringify(value)}`
@@ -16,7 +16,6 @@ const Part = ({ coursePart } : { coursePart: CoursePart }) => {
                     <p>groupProjectCount: {coursePart.groupProjectCount}</p>
                 </div>
             );
-
         case "background":
             return (
                 <div>
@@ -45,7 +44,7 @@ const Part = ({ coursePart } : { coursePart: CoursePart }) => {
             );
         default:
             assertNever(coursePart);
-            return null;
+        return <></>;
     }
 };
 

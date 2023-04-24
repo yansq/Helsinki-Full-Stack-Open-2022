@@ -1,7 +1,6 @@
 import Part from "./Part";
 import { CoursePart } from "../interface";
 
-
 const Content = ({ courseParts }: { courseParts: CoursePart[] }): JSX.Element => {
     return (
         <>
